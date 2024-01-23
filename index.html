@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+    <header>
+        <h1>Library</h1>
+    </header>
+    <main>
+        <dialog>
+            <form action="" method="dialog" novalidate>
+                <label for="title">
+                    Title:
+                    <input type="text" name="title" id="title" data-index-number="0" required>
+                    <span class="error"></span>
+                </label>
+                <label for="author">
+                    Author:
+                    <input type="text" id="author" name="author" data-index-number="1" required>
+                    <span class="error"></span>
+                </label>
+                <label for="pages">
+                    Pages:
+                    <input type="number" id="pages" name="pages" min="1" max="10000" data-index-number="2" required>
+                    <span class="error"></span>
+                </label>
+                <label for="read">
+                    Have you read it?
+                    <input type="checkbox" id="read" name="read">
+                </label>
+                <label for="book-file">
+                    Enter your book in PDF format (optional) 
+                    <input type="file" id="book-file" accept=".pdf">
+                </label>
+                <button id="add" type="submit">Add</button>
+            </form>
+        </dialog>
+        <button id="add-book">+Add Book</button>
+        <section id="library"></section>
+    </main>
+    <footer></footer>
+</body>
+</html>
