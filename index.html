@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./images/library-icon.svg">
     <script src="script.js" defer></script>
     <title>Library</title>
 </head>
 <body>
     <header>
-        <h1>Library</h1>
+        <h1>My Personal Library</h1>
     </header>
     <main>
         <dialog>
@@ -29,13 +30,13 @@
                     <input type="number" id="pages" name="pages" min="1" max="10000" data-index-number="2" required>
                     <span class="error"></span>
                 </label>
+                <label for="book-file">
+                    <span>Enter your book in PDF format</span>
+                    <input type="file" id="book-file" accept=".pdf">
+                </label>
                 <label for="read">
                     Have you read it?
                     <input type="checkbox" id="read" name="read">
-                </label>
-                <label for="book-file">
-                    Enter your book in PDF format (optional) 
-                    <input type="file" id="book-file" accept=".pdf">
                 </label>
                 <button id="add" type="submit">Add</button>
             </form>

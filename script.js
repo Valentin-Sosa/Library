@@ -7,18 +7,24 @@ const pages = document.getElementById("pages");
 const read = document.getElementById("read");
 const modal = document.querySelector("dialog");
 const bookFile = document.getElementById("book-file");
+const bookFileLabel = document.querySelector("label[for=book-file] > span")
 const submitBtn = document.getElementById("add");
 const library = document.getElementById("library");
 let myLibrary = [];
 
-addBookBtn.addEventListener("click", () => modal.showModal());
+addBookBtn.addEventListener("click", () =>{
+  resetValidation();
+  form.reset();
+  modal.showModal()
+});
 title.addEventListener("input", () => checkInputValidation(title));
 author.addEventListener("input", () => checkInputValidation(author));
 pages.addEventListener("input", () => checkInputValidation(pages));
+bookFile.addEventListener("input", ()=> showFileName());
 form.addEventListener("submit", event => checkAllInputsValidation(event));
 library.addEventListener("click", e =>{
   if(e.target.textContent === "Remove") removeBook(myLibrary[e.target.dataset.indexNumber]);
-  else if(e.target.textContent === "Read") changeReadStatus(e);
+  else if(e.target.textContent === "Read" || e.target.textContent === "Not read yet") changeReadStatus(e);
   else if(e.target.textContent === "Open book file") openFileBook(myLibrary[e.target.dataset.indexNumber]);
 })
 
@@ -35,7 +41,6 @@ function addBookToLibrary()
 {
   const newBook = new Book(author.value,title.value,pages.value,read.checked, bookFile.files[0]);
   myLibrary.push(newBook);
-  form.reset();
   modal.close();
   showCardBook(newBook);
 }
@@ -44,6 +49,7 @@ function showCardBook(book)
 {
   const bookSection = document.createElement("section");
   const titleSection = document.createElement("section");
+  titleSection.id = "titleBook";
   const authorSection = document.createElement("section");
   const pagesSection = document.createElement("section");
   const readBtn = document.createElement("button");
@@ -54,12 +60,12 @@ function showCardBook(book)
   bookSection.appendChild(titleSection);
   bookSection.appendChild(authorSection);
   bookSection.appendChild(pagesSection);
-  bookSection.appendChild(readBtn);
-  bookSection.appendChild(removeBtn);
   bookSection.appendChild(openBookBtn);
+  bookSection.appendChild(removeBtn);
+  bookSection.appendChild(readBtn);
 
   titleSection.textContent = `${book.title}`;
-  authorSection.textContent = `Author: ${book.author}`;
+  authorSection.textContent = `By: ${book.author}`;
   pagesSection.textContent = `Pages: ${book.numberOfPages}`;
   readBtn.dataset.indexNumber = myLibrary.indexOf(book);
   removeBtn.textContent = "Remove";
@@ -69,14 +75,17 @@ function showCardBook(book)
 
   if(book.read)
   {
-    readBtn.style.background = "green";
+    readBtn.style.background = "#16a34a";
     readBtn.textContent = "Read";
   } 
   else
   {
-    readBtn.style.background = "red";
+    readBtn.style.background = "#dc2626";
     readBtn.textContent = "Not read yet";
   } 
+  
+  if(book.title.length > 20) titleSection.style.fontSize = "1rem";
+  else if(book.title.length > 15) titleSection.style.fontSize = "1.3rem";
 }
 
 function removeBook(book)
@@ -97,12 +106,14 @@ function changeReadStatus(e)
 {
   if(myLibrary[e.target.dataset.indexNumber].read)
   {
-    e.target.style.background = "red";
+    e.target.style.background = "#dc2626";
+    e.target.textContent = "Not read yet";
     myLibrary[e.target.dataset.indexNumber].read = false;
   }
   else
   {
-    e.target.style.background = "green";
+    e.target.style.background = "#16a34a";
+    e.target.textContent = "Read";
     myLibrary[e.target.dataset.indexNumber].read = true;
   }
 }
@@ -118,6 +129,7 @@ function checkAllInputsValidation(event)
   else
   { 
     for(let i=0; i<3; i++) checkInputValidation(inputs[i]);
+    form.className = "";
     addBookToLibrary();
   }
 }
@@ -128,12 +140,30 @@ function checkInputValidation(input)
     {
         errors[input.dataset.indexNumber].textContent = "";
         errors[input.dataset.indexNumber].className = "error";
-        input.className = "valid";
     }
     else if(input.validity.valueMissing)
     {
       errors[input.dataset.indexNumber].textContent = "*This field is required";
       errors[input.dataset.indexNumber].className = "error active";
-      input.className = "invalid";
+      form.className = "form-error";
     }
+}
+
+function resetValidation()
+{
+  const inputs = [title,author,pages];
+  inputs.forEach(input =>
+    {
+      errors[input.dataset.indexNumber].textContent = "";
+      errors[input.dataset.indexNumber].className = "error";
+    })
+
+  bookFileLabel.textContent = "Enter your book in PDF format"
+  bookFileLabel.style.color = "black"
+}
+
+function showFileName()
+{
+  bookFileLabel.textContent = `✔ ${bookFile.files[0].name}`;
+  bookFileLabel.style.color = "#16a34a"
 }

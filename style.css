@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body
+{
+    background-color: #1e293b;
+}
+
+header
+{
+    background-color: #f3f4f6;
+    padding: 4vh 8vw;
+    font-size: 1.2rem;
+}
+
+main
+{
+    height: 86vh;
+    display: grid;
+    place-items: center;
+    grid-template-rows: 1fr 7fr;
+    gap: 4vh;
+   
+}
+
+#add-book
+{
+    border: none;
+    background-color: #1e293b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color:#f3f4f6;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    margin-top: 3.5vh;
+    outline: 0;
+}
+
+#add-book:hover
+{
+    background-color: #0f172a;
+}
+
+dialog
+{
+    position: absolute;
+    left: 40vw;
+    top: 28vh;
+    height: 50vh;
+    width: 20vw;
+    padding: 4vh 2vw 0;
+    border: none;
+    border-radius: 1rem;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 45vh;
+}
+
+.error
+{
+    height: 1vh;
+}
+
+label[for=title], label[for=author], label[for=pages]
+{
+    display: flex;
+    flex-direction: column;
+    font-weight: 450;
+}
+
+label[for=book-file]
+{
+    padding: 1vh; 
+    margin-top: 1vh;
+    background-color: #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    height: 4vh;
+}
+
+label[for=read]
+{
+    font-weight: 450;
+}
+
+#add
+{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #86efac;
+    height: 5vh;
+    width: 13vw;
+    align-self: center;
+}
+
+input[type=text], input[type=number]
+{
+    height: 4vh;
+    outline: 0;
+    background-color: #e2e8f0;
+    border: none;
+    border-radius: 0.5rem;
+    padding-left: 1vw;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+input[type=file]
+{
+    display: none;
+}
+
+#library
+{
+    height: 70vh;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    place-items: center;
+    row-gap: 4vh;
+}
+
+#library > section
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+
+    background-color: #f3f4f6;
+    width: 18vw;
+    max-width: 300px;
+    height: 35vh;
+    max-height: 300px;
+    border-radius: 0.5rem;
+    padding: 2vh 2vw;
+}
+
+#titleBook
+{
+    height: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#library > section > button
+{
+    border: none;
+    background-color: #1e293b;
+    height: 40px;
+    color: #f3f4f6;
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+
+.error.active
+{
+    color: #dc2626;
+    font-size: 0.8rem;
+}
+
